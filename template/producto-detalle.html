@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API REST en Java Spring | Asesorías Tecnológicas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ====== Producto detalle (solo HTML + CSS) ====== */
+    .product-hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    @media (min-width: 992px) {
+      .product-hero { grid-template-columns: 1.2fr 1fr; }
+    }
+    .product-figure {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .product-figure img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+    }
+    .product-summary {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 1rem;
+      padding: 1rem;
+      display: grid;
+      gap: .5rem;
+    }
+    .badge-chip {
+      font-size: .75rem;
+      padding: .35rem .6rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      width: max-content;
+    }
+    .price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .stock { color: #86efac; }
+    .specs { margin: 0; padding-left: 1rem; }
+    .specs li { margin-bottom: .25rem; }
+    .actions {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: .25rem;
+    }
+    .btn-outline {
+      display: inline-block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: .6rem .9rem;
+      border-radius: .75rem;
+      font-weight: 600;
+    }
+    .btn-outline:hover, .btn-outline:focus {
+      text-decoration: underline;
+      background: rgba(255,255,255,.06);
+    }
+    .section-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="index.html">AsesoríasTech</a>
+      <button class="navbar-toggler" type="button" aria-controls="navbarMain" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse show" id="navbarMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a class="btn btn-light" href="#registrarse">Registrarse</a>
+          <a class="btn btn-light" href="#login">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="container">
+    <nav class="small mb-3">
+      <a href="productos.html" class="text-light text-decoration-none">&larr; Volver a productos</a>
+    </nav>
+
+    <section class="product-hero mb-4">
+      <figure class="product-figure">
+        <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop"
+             alt="Imagen del servicio API REST en Java Spring" />
+      </figure>
+
+      <aside class="product-summary">
+        <span class="badge-chip">Servicios</span>
+        <h1 class="h3 fw-bold mb-1">API REST en Java Spring</h1>
+        <div class="d-flex align-items-center justify-content-between">
+          <span class="price">$750.000</span>
+          <small class="stock">Disponible</small>
+        </div>
+        <div><small class="text-secondary-emphasis">SKU:</small> <small>SV-API-SPR-001</small></div>
+        <div><small class="text-secondary-emphasis">Categoría:</small> <small>Desarrollo Backend</small></div>
+
+        <div class="actions">
+          <a class="btn-outline" href="#cotizar">Solicitar cotización</a>
+          <a class="btn-outline" href="mailto:contacto@asesoriastech.cl">Contactar</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-card mb-4">
+      <h2 class="h5">Descripción</h2>
+      <p class="mb-0">
+        Servicio de desarrollo de APIs RESTful con Java Spring Boot: modelamiento de datos,
+        endpoints versionados, seguridad con JWT/Keycloak y documentación con OpenAPI/Swagger.
+        Incluye pruebas unitarias e integración continua.
+      </p>
+    </section>
+
+    <section class="row g-3">
+      <div class="col-12 col-lg-6">
+        <div class="section-card h-100">
+          <h3 class="h6">Especificaciones</h3>
+          <ul class="specs">
+            <li>Framework: Spring Boot 3.x</li>
+            <li>Persistencia: JPA/Hibernate + PostgreSQL u Oracle</li>
+            <li>Autenticación: JWT/OAuth2</li>
+            <li>Entrega: Docker image + documentación</li>
+            <li>Tiempo estimado: 2–4 semanas (según alcance)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="section-card h-100">
+          <h3 class="h6">Incluye</h3>
+          <ul class="specs">
+            <li>Arquitectura y diseño de endpoints</li>
+            <li>Control de versiones (Git)</li>
+            <li>Pruebas automatizadas básicas</li>
+            <li>Guía de despliegue</li>
+            <li>Sesión de traspaso (1 hora)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-light">
+    <div class="container py-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+      <div class="small">
+        © 2025 <strong>Christian Acuña</strong>. Todos los derechos reservados.
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/0000000000" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <i class="bi bi-whatsapp fs-4"></i>
+        </a>
+        <a href="https://www.instagram.com/" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="bi bi-instagram fs-4"></i>
+        </a>
+        <a href="https://twitter.com/" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="Twitter X">
+          <i class="bi bi-twitter-x fs-4"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

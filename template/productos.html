@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos | Asesorías Tecnológicas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ====== Productos (solo HTML + CSS) ====== */
+    .page-title { margin-bottom: 1rem; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 576px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 992px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+    }
+    .product-media {
+      aspect-ratio: 16/10;
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .product-body { padding: 1rem; display: flex; flex-direction: column; gap: .5rem; }
+    .product-title { font-size: 1rem; margin: 0; }
+    .product-category {
+      font-size: .75rem;
+      padding: .25rem .5rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      width: max-content;
+    }
+    .product-price { font-weight: 700; }
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      margin-top: .25rem;
+    }
+    .product-link {
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: .75rem;
+      padding: .5rem .75rem;
+      color: inherit;
+    }
+    .product-link:hover, .product-link:focus {
+      text-decoration: underline;
+      background: rgba(255,255,255,.06);
+    }
+    .stock-ok { color: #86efac; }   /* verde claro */
+    .stock-low { color: #fde68a; }  /* amarillo claro */
+    .stock-out { color: #fca5a5; }  /* rojo claro */
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="index.html">AsesoríasTech</a>
+      <button class="navbar-toggler" type="button" aria-controls="navbarMain" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse show" id="navbarMain">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#contacto">Contacto</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a class="btn btn-light" href="#registrarse">Registrarse</a>
+          <a class="btn btn-light" href="#login">Login</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <main class="container">
+    <header class="d-flex flex-column flex-md-row align-items-md-end justify-content-between gap-2 mb-3">
+      <div>
+        <h1 class="page-title h3 fw-bold">Productos & Servicios</h1>
+        <p class="mb-0">Soluciones de informática pensadas para tu negocio.</p>
+      </div>
+      <small class="text-secondary-emphasis">Catálogo demo (5 ítems)</small>
+    </header>
+
+    <section class="products-grid">
+      <!-- 1 -->
+      <article class="product-card">
+        <img class="product-media" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="Desarrollo de API REST en Java Spring" />
+        <div class="product-body">
+          <span class="product-category">Servicios</span>
+          <h3 class="product-title">API REST en Java Spring</h3>
+          <p class="mb-2 small">Diseño y construcción de microservicios con Spring Boot, JPA y seguridad con JWT.</p>
+          <div class="product-meta">
+            <span class="product-price">$750.000</span>
+            <a class="product-link" href="producto-detalle.html">Ver detalle</a>
+          </div>
+          <small class="stock-ok">Stock: Disponible</small>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="product-card">
+        <img class="product-media" src="https://images.unsplash.com/photo-1516116216624-53e697fedbe9?q=80&w=1200&auto=format&fit=crop" alt="Desarrollo Web Full‑Stack en Python" />
+        <div class="product-body">
+          <span class="product-category">Servicios</span>
+          <h3 class="product-title">Web Full‑Stack con Python</h3>
+          <p class="mb-2 small">Sitios y sistemas con Django/Flask, ORM, templates y despliegue en producción.</p>
+          <div class="product-meta">
+            <span class="product-price">$680.000</span>
+            <a class="product-link" href="producto-detalle.html">Ver detalle</a>
+          </div>
+          <small class="stock-ok">Agenda: Cupos disponibles</small>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="product-card">
+        <img class="product-media" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" alt="Soporte y administración Oracle" />
+        <div class="product-body">
+          <span class="product-category">Servicios</span>
+          <h3 class="product-title">Soporte & DBA Oracle</h3>
+          <p class="mb-2 small">Instalación, tuning, backup & recovery, y automatización con PL/SQL.</p>
+          <div class="product-meta">
+            <span class="product-price">$540.000</span>
+            <a class="product-link" href="producto-detalle.html">Ver detalle</a>
+          </div>
+          <small class="stock-low">Agenda: Alta demanda</small>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="product-card">
+        <img class="product-media" src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop" alt="Implementación ERP y capacitación" />
+        <div class="product-body">
+          <span class="product-category">Servicios</span>
+          <h3 class="product-title">Implementación de ERP</h3>
+          <p class="mb-2 small">Levantamiento de procesos, parametrización y capacitación para equipos.</p>
+          <div class="product-meta">
+            <span class="product-price">$1.150.000</span>
+            <a class="product-link" href="producto-detalle.html">Ver detalle</a>
+          </div>
+          <small class="stock-ok">Agenda: Disponible</small>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="product-card">
+        <img class="product-media" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop" alt="Kit de monitoreo e integración DevOps" />
+        <div class="product-body">
+          <span class="product-category">Producto</span>
+          <h3 class="product-title">Kit DevOps Monitoring</h3>
+          <p class="mb-2 small">Dashboard + alertas para microservicios (Prometheus, Grafana, Loki).</p>
+          <div class="product-meta">
+            <span class="product-price">$320.000</span>
+            <a class="product-link" href="producto-detalle.html">Ver detalle</a>
+          </div>
+          <small class="stock-ok">Stock: 12 unidades</small>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-light">
+    <div class="container py-4 d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+      <div class="small">
+        © 2025 <strong>Christian Acuña</strong>. Todos los derechos reservados.
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a href="https://wa.me/0000000000" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <i class="bi bi-whatsapp fs-4"></i>
+        </a>
+        <a href="https://www.instagram.com/" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="bi bi-instagram fs-4"></i>
+        </a>
+        <a href="https://twitter.com/" class="text-light" target="_blank" rel="noopener noreferrer" aria-label="Twitter X">
+          <i class="bi bi-twitter-x fs-4"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

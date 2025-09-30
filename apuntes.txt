@@ -1,0 +1,9 @@
+git --version
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
+
+git init
+git add .
+git commit -m "init: primer commit"
+git remote add origin https://github.com/profe-christian/landing-page
+git push -u origin main
