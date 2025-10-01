@@ -1,6 +1,6 @@
 import imagen from '../assets/img/tech.jpg';
 
-export const Main = () => {
+export const Body = () => {
     return (
         <>
             <main className="container" id="inicio">
