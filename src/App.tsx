@@ -1,17 +1,16 @@
-import { Footer } from './components/Footer'
-import { Body } from './components/Body'
-import { Navbar } from './components/Navbar'
-
+import { Route, Routes } from "react-router-dom";
+import { Index } from "./pages/Index";
+import { Products } from "./pages/Products";
+import { Contact } from "./pages/Contact";
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      <Body/>
-      <Footer/>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/contact" element={<Contact />} />
+    </Routes>
+  );
 }
 
-export default App
-
+export default App;
