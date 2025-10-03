@@ -23,14 +23,10 @@ export const Navbar = () => {
 
           <div className="collapse navbar-collapse" id="navbarMain">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="#inicio"
-                >
+              <li>
+                <NavLink to="/" className="nav-link">
                   Inicio
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink to="/products" className="nav-link">
@@ -38,7 +34,7 @@ export const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="./contact" className="nav-link">
+                <Link to="/contact" className="nav-link">
                   Contacto
                 </Link>
               </li>
