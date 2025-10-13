@@ -29,3 +29,7 @@ footer {
 .nav-link:hover {
     text-decoration: underline;
 }
+
+.card img{
+    background-color: aliceblue;
+}
