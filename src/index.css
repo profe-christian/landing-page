@@ -33,3 +33,18 @@ footer {
 .card img{
     background-color: aliceblue;
 }
+
+/* CSS para detalle de producto */
+.object-fit-cover{ object-fit: cover; object-position: center; }
+.object-fit-contain{ object-fit: contain; object-position: center; }
+.price-now{ font-size: clamp(1.5rem, 2.2vw + 1rem, 2.25rem); font-weight: 800; }
+.price-old{ text-decoration: line-through; }
+.buy-cta .btn-lg{ padding: .9rem 1.25rem; }
+.spec-card{ background: var(--bs-light-bg-subtle); }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
