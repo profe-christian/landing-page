@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 import { products } from "../data/products";
+import { useState } from "react";
 
 export const Products = () => {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const filteredProducts =
+    selectedCategory === "all"
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
+
+  const categories = ["all", ...new Set(products.map((p) => p.category))];
+
   return (
     <>
       <main className="container">
@@ -12,15 +22,35 @@ export const Products = () => {
               Soluciones de informática pensadas para tu negocio.
             </p>
           </div>
+          {/* FILTRO DE */}
+          <div className="d-flex align-items-center gap-2">
+            <label htmlFor="cat" className="form-label mb-0">
+              Categoría
+            </label>
+            <select
+              name="category"
+              id="category"
+              className="form-select form-select-sm"
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat === "all" ? "Todos" : cat}
+                </option>
+              ))}
+            </select>
+          </div>
         </header>
         <section className="row g-4">
-          {products.map((p) => (
+          {filteredProducts.length === 0 ? (
             <>
-              <div className="col-lg-4 col-md-6 col-12">
-                <article
-                  key={p.id}
-                  className="card h-100 bg-dark text-light border-secondary-subtle"
-                >
+              <h1>No hay productos</h1>
+            </>
+          ) : null}
+          {filteredProducts.map((p) => (
+            <>
+              <div key={p.id} className="col-lg-4 col-md-6 col-12">
+                <article className="card h-100 bg-dark text-light border-secondary-subtle">
                   <div className="ratio ratio-16x9">
                     <img
                       src={p.imageSrc}

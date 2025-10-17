@@ -36,7 +36,7 @@ export const products: Product[] = [
     id: 4,
     title: "Silla Gamer Ω",
     description: "Soporte lumbar, 135°",
-    category: "Mobiliario",
+    category: "Redes",
     price: 189990,
     imageSrc: "/img/ps5.png",
   },
@@ -48,4 +48,5 @@ export const products: Product[] = [
     price: 84990,
     imageSrc: "/img/telefono1.jpg",
   },
+  
 ];
