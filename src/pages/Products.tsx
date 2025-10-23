@@ -4,13 +4,18 @@ import { useState } from "react";
 
 export const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-
-  const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter((p) => p.category === selectedCategory);
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000000);
 
   const categories = ["all", ...new Set(products.map((p) => p.category))];
+
+  const filteredProducts = products.filter((p) => {
+    return (
+      (selectedCategory === "all" || p.category === selectedCategory) &&
+      p.price >= minPrice &&
+      p.price <= maxPrice
+    );
+  });
 
   return (
     <>
@@ -22,7 +27,7 @@ export const Products = () => {
               Soluciones de informática pensadas para tu negocio.
             </p>
           </div>
-          {/* FILTRO DE */}
+          {/* FILTRO DE CATEGORIA*/}
           <div className="d-flex align-items-center gap-2">
             <label htmlFor="cat" className="form-label mb-0">
               Categoría
@@ -39,6 +44,34 @@ export const Products = () => {
                 </option>
               ))}
             </select>
+          </div>
+          {/* FILTRO DE PRECIO MIN Y MAX */}
+          <div className="d-flex align-items-center gap-2">
+            <label htmlFor="minPrice" className="form-label mb-0">
+              Mín
+            </label>
+            <input
+              id="minPrice"
+              type="number"
+              className="form-control form-control-sm"
+              style={{ width: 110 }}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+            />
+
+            <label htmlFor="maxPrice" className="form-label mb-0">
+              Máx
+            </label>
+            <input
+              id="maxPrice"
+              type="number"
+              className="form-control form-control-sm"
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              style={{ width: 110 }}
+            />
+
+            <button className="btn btn-outline-secondary btn-sm">
+              Restablecer
+            </button>
           </div>
         </header>
         <section className="row g-4">

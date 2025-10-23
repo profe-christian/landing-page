@@ -44,3 +44,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+.cart-badge-sm {
+    font-size: 0.65rem; /* Reduce el tamaño de la fuente */
+    padding: .3em .5em; /* Ajusta el relleno para que la píldora sea más compacta */
+}
