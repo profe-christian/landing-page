@@ -23,7 +23,6 @@ export const Products = () => {
               Soluciones de informática pensadas para tu negocio.
             </p>
           </div>
-<<<<<<< HEAD
           {/* FILTRO DE CATEGORIA*/}
           <div className="d-flex align-items-center gap-2">
             <label htmlFor="cat" className="form-label mb-0">
