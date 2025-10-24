@@ -23,23 +23,53 @@ export const Products = () => {
               Soluciones de informática pensadas para tu negocio.
             </p>
           </div>
+<<<<<<< HEAD
+          {/* FILTRO DE CATEGORIA*/}
           <div className="d-flex align-items-center gap-2">
-            <label>Categoria</label>
-            <select 
+            <label htmlFor="cat" className="form-label mb-0">
+              Categoría
+            </label>
+            <select
               name="category"
-              id="category" 
+              id="category"
               className="form-select form-select-sm"
-              onChange={(e)=> setSelectedCategory(e.target.value)}>
-              {
-                categories.map((cat)=>(
-                  <option key={cat} value={cat}>
-                    {cat==="all" ? "Todos" : cat}
-                  </option>
-                ))
-              }
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat === "all" ? "Todos" : cat}
+                </option>
+              ))}
             </select>
           </div>
+          {/* FILTRO DE PRECIO MIN Y MAX */}
+          <div className="d-flex align-items-center gap-2">
+            <label htmlFor="minPrice" className="form-label mb-0">
+              Mín
+            </label>
+            <input
+              id="minPrice"
+              type="number"
+              className="form-control form-control-sm"
+              style={{ width: 110 }}
+              onChange={(e) => setMinPrice(Number(e.target.value))}
+            />
 
+            <label htmlFor="maxPrice" className="form-label mb-0">
+              Máx
+            </label>
+            <input
+              id="maxPrice"
+              type="number"
+              className="form-control form-control-sm"
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              style={{ width: 110 }}
+            />
+
+            <button className="btn btn-outline-secondary btn-sm">
+              Restablecer
+            </button>
+          </div>
         </header>
         <section className="row g-4">
           { filteredProducts.length===0 && <p>No hay Productos</p>}
