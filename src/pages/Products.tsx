@@ -2,17 +2,16 @@ import { Link } from "react-router-dom";
 import { products } from "../data/products";
 import { useState } from "react";
 
-
 export const Products = () => {
-  const categories = ["all",...new Set(products.map((p)=> p.category))];
-
+  const categories = ["all", ...new Set(products.map((p) => p.category))];
   console.log(categories);
-  
-  const [selectedCategory,setSelectedCategory] = useState("all");
-   const filteredProducts = 
-    selectedCategory === "all" 
-    ? products : products.filter((p)=> p.category === selectedCategory);
-  
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const filteredProducts =
+    selectedCategory === "all"
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
+
   return (
     <>
       <main className="container">
@@ -51,7 +50,6 @@ export const Products = () => {
               type="number"
               className="form-control form-control-sm"
               style={{ width: 110 }}
-              onChange={(e) => setMinPrice(Number(e.target.value))}
             />
 
             <label htmlFor="maxPrice" className="form-label mb-0">
@@ -61,7 +59,6 @@ export const Products = () => {
               id="maxPrice"
               type="number"
               className="form-control form-control-sm"
-              onChange={(e) => setMaxPrice(Number(e.target.value))}
               style={{ width: 110 }}
             />
 
@@ -71,7 +68,7 @@ export const Products = () => {
           </div>
         </header>
         <section className="row g-4">
-          { filteredProducts.length===0 && <p>No hay Productos</p>}
+          {filteredProducts.length === 0 && <p>No hay Productos</p>}
           {filteredProducts.map((p) => (
             <>
               <div className="col-lg-4 col-md-6 col-12">
