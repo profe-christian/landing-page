@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import { products } from "../data/products";
+import { useState } from "react";
+
 
 export const Products = () => {
+  const categories = ["all",...new Set(products.map((p)=> p.category))];
+
+  console.log(categories);
+  
+  const [selectedCategory,setSelectedCategory] = useState("all");
+   const filteredProducts = 
+    selectedCategory === "all" 
+    ? products : products.filter((p)=> p.category === selectedCategory);
+  
   return (
     <>
       <main className="container">
@@ -12,9 +23,27 @@ export const Products = () => {
               Soluciones de informática pensadas para tu negocio.
             </p>
           </div>
+          <div className="d-flex align-items-center gap-2">
+            <label>Categoria</label>
+            <select 
+              name="category"
+              id="category" 
+              className="form-select form-select-sm"
+              onChange={(e)=> setSelectedCategory(e.target.value)}>
+              {
+                categories.map((cat)=>(
+                  <option key={cat} value={cat}>
+                    {cat==="all" ? "Todos" : cat}
+                  </option>
+                ))
+              }
+            </select>
+          </div>
+
         </header>
         <section className="row g-4">
-          {products.map((p) => (
+          { filteredProducts.length===0 && <p>No hay Productos</p>}
+          {filteredProducts.map((p) => (
             <>
               <div className="col-lg-4 col-md-6 col-12">
                 <article
