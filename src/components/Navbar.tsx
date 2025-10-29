@@ -47,6 +47,19 @@ export const Navbar = () => {
               <a className="btn btn-light" href="#login">
                 Login
               </a>
+              <a
+                className="text-light fs-4 position-relative"
+                href="carrito.html"
+                aria-label="Ver Carrito de Compras"
+              >
+                <i className="bi bi-cart-fill"></i>
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-badge-sm">
+                  3{" "}
+                  <span className="visually-hidden">
+                    Productos en el carrito
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
         </div>
