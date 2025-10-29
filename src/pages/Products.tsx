@@ -3,12 +3,16 @@ import { products } from "../data/products";
 import { useState } from "react";
 
 export const Products = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(1000000);
-
   const categories = ["all", ...new Set(products.map((p) => p.category))];
+  const prices = products.map((p) => p.price);
 
+  const minPriceProductos = Math.min(...prices);
+  const maxPriceProductos = Math.max(...prices);
+
+  const [minPrice, setMinPrice] = useState(minPriceProductos);
+  const [maxPrice, setMaxPrice] = useState(maxPriceProductos);
+
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const filteredProducts = products.filter((p) => {
     return (
       (selectedCategory === "all" || p.category === selectedCategory) &&
@@ -55,7 +59,11 @@ export const Products = () => {
               type="number"
               className="form-control form-control-sm"
               style={{ width: 110 }}
-              onChange={(e) => setMinPrice(Number(e.target.value))}
+              onChange={(e) =>
+                e.target.value === ""
+                  ? setMinPrice(minPriceProductos)
+                  : setMinPrice(Number(e.target.value))
+              }
             />
 
             <label htmlFor="maxPrice" className="form-label mb-0">
@@ -65,8 +73,12 @@ export const Products = () => {
               id="maxPrice"
               type="number"
               className="form-control form-control-sm"
-              onChange={(e) => setMaxPrice(Number(e.target.value))}
               style={{ width: 110 }}
+              onChange={(e) =>
+                e.target.value === ""
+                  ? setMaxPrice(maxPriceProductos)
+                  : setMaxPrice(Number(e.target.value))
+              }
             />
 
             <button className="btn btn-outline-secondary btn-sm">
@@ -75,15 +87,14 @@ export const Products = () => {
           </div>
         </header>
         <section className="row g-4">
-          {filteredProducts.length === 0 ? (
-            <>
-              <h1>No hay productos</h1>
-            </>
-          ) : null}
+          {filteredProducts.length === 0 && <p>No hay Productos</p>}
           {filteredProducts.map((p) => (
             <>
-              <div key={p.id} className="col-lg-4 col-md-6 col-12">
-                <article className="card h-100 bg-dark text-light border-secondary-subtle">
+              <div className="col-lg-4 col-md-6 col-12">
+                <article
+                  key={p.id}
+                  className="card h-100 bg-dark text-light border-secondary-subtle"
+                >
                   <div className="ratio ratio-16x9">
                     <img
                       src={p.imageSrc}
