@@ -47,9 +47,9 @@ export const Navbar = () => {
               <a className="btn btn-light" href="#login">
                 Login
               </a>
-              <a
+              <Link
                 className="text-light fs-4 position-relative"
-                href="carrito.html"
+                to="/carrito"
                 aria-label="Ver Carrito de Compras"
               >
                 <i className="bi bi-cart-fill"></i>
@@ -59,7 +59,7 @@ export const Navbar = () => {
                     Productos en el carrito
                   </span>
                 </span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
