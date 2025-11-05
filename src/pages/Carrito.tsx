@@ -1,71 +1,112 @@
-import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
 export const Carrito = () => {
+  const { items, addToCart, removeOne, removeAll, clearCart, formatCLP } =
+    useCart();
+
+  // Subtotal por item y total general con reduce (funcion de JS)
+  const totalAmount = items.reduce(
+    (acumulador, producto) => acumulador + producto.price * producto.qty,
+    0
+  );
+
+  if (items.length === 0) {
+    return (
+      <main className="container py-4">
+        <h1 className="h3">Carrito</h1>
+        <p className="text-secondary">Tu carrito está vacío.</p>
+      </main>
+    );
+  }
+
   return (
     <>
-      <main className="container py-5" id="carrito">
-        <h1 className="display-5 fw-bold mb-4">
-          Registro del Carrito de Compras
-        </h1>
+      <main className="container py-4">
+        <header className="d-flex align-items-center justify-content-between mb-3">
+          <h1 className="h3">Carrito</h1>
+          <button className="btn btn-danger btn-md" onClick={clearCart}>
+            Vaciar carrito
+          </button>
+        </header>
 
-        <div className="row">
-          <div className="col-12">
-            <div className="table-responsive">
-              <table className="table table-dark table-striped align-middle">
-                <thead>
-                  <tr>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Precio Unitario</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Subtotal</th>
-                    <th scope="col">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Asesoría de Desarrollo Web</td>
-                    <td>$ 50.000</td>
-                    <td>1</td>
-                    <td>$ 50.000</td>
-                    <td>
-                      <button className="btn btn-sm btn-danger">
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Integración de Sistemas (Paquete Básico)</td>
-                    <td>$ 120.000</td>
-                    <td>2</td>
-                    <td>$ 240.000</td>
-                    <td>
-                      <button className="btn btn-sm btn-danger">
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colSpan={3} className="text-end fw-bold">
-                      Total:
-                    </td>
-                    <td colSpan={3} className="fw-bold fs-5 text-success">
-                      $ 290.000
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <section className="row g-3">
+          <div className="col-12 col-lg-8">
+            <ul className="list-group">
+              {items.map((it) => {
+                const subtotal = it.price * it.qty;
+                return (
+                  <li
+                    key={it.id}
+                    className="list-group-item d-flex align-items-center justify-content-between"
+                  >
+                    <div className="d-flex align-items-center gap-2">
+                      <img
+                        src={it.imageSrc}
+                        alt={it.title}
+                        width={64}
+                        height={64}
+                        className="object-fit-contain"
+                      />
+                      <div>
+                        <h6 className="mb-1">{it.title}</h6>
+                        <small className="text-secondary">
+                          {formatCLP(it.price)} c/u
+                        </small>
+                      </div>
+                    </div>
 
-            <div className="d-flex justify-content-end gap-3 mt-4">
-              <Link to="/products" className="btn btn-outline-light">
-                Seguir Comprando
-              </Link>
-              <button className="btn btn-success btn-lg">
-                Proceder al Pago
-              </button>
-            </div>
+                    <div className="d-flex align-items-center gap-2">
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => removeOne(it.id)}
+                      >
+                        -
+                      </button>
+                      <span className="px-2">{it.qty}</span>
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => addToCart(it)}
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <div className="text-end" style={{ minWidth: 120 }}>
+                      <div className="fw-bold">{formatCLP(subtotal)}</div>
+                      <button
+                        className="btn btn-link text-danger p-0 small"
+                        onClick={() => removeAll(it.id)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
-        </div>
+
+          <aside className="col-12 col-lg-4">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title">Resumen</h5>
+                <div className="d-flex justify-content-between">
+                  <span>Total</span>
+                  <span className="fw-bold">{formatCLP(totalAmount)}</span>
+                </div>
+                <hr />
+                <div className="d-grid-2">
+                  <button className="btn btn-success m-2">
+                    Proceder al pago
+                  </button>
+                  <button className="btn btn-primary m-2">
+                    Seguir comprando
+                  </button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
       </main>
     </>
   );

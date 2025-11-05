@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { products } from "../data/products";
 import { useState } from "react";
+import { useCart } from "../contexts/CartContext";
 
 export const Products = () => {
+  const { addToCart, formatCLP } = useCart();
   const categories = ["all", ...new Set(products.map((p) => p.category))];
   const prices = products.map((p) => p.price);
 
@@ -110,13 +112,21 @@ export const Products = () => {
                     <p className="card-text small">{p.description}</p>
                   </div>
                   <div className="card-footer d-flex align-items-center justify-content-between">
-                    <span className="fw-bold">${p.price}</span>
-                    <Link
-                      className="btn btn-outline-light btn-sm"
-                      to={`/products/${p.id}`}
-                    >
-                      Ver detalle
-                    </Link>
+                    <span className="fw-bold">{formatCLP(p.price)}</span>
+                    <div>
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => addToCart(p)}
+                      >
+                        Agregar
+                      </button>
+                      <Link
+                        className="btn btn-outline-light btn-sm m-2"
+                        to={`/products/${p.id}`}
+                      >
+                        Ver detalle
+                      </Link>
+                    </div>
                   </div>
                 </article>
               </div>

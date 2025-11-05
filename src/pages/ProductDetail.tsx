@@ -1,10 +1,15 @@
 import { useParams } from "react-router-dom";
 import { products } from "../data/products";
+import { useCart } from "../contexts/CartContext";
 
 export const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const pid = Number(id);
   const product = products.find((p) => p.id === pid);
+  const { addToCart, formatCLP } = useCart();
+
+  if (!product) return <h2>Producto no encontrado</h2>;
+
   return (
     <>
       <main className="container">
@@ -13,7 +18,7 @@ export const ProductDetail = () => {
             <div className="card border-0">
               <div className="ratio ratio-16x9 bg-body-secondary rounded">
                 <img
-                  src={product?.imageSrc}
+                  src={product.imageSrc}
                   alt="Notebook"
                   className="w-100 h-100 object-fit-contain rounded"
                 />
@@ -26,17 +31,15 @@ export const ProductDetail = () => {
               <span className="text-uppercase small text-secondary">
                 Notebook
               </span>
-              <span className="small text-secondary">
-                Código: {product?.id}
-              </span>
+              <span className="small text-secondary">Código: {product.id}</span>
             </div>
 
-            <h1 className="h3 mt-1">{product?.title}</h1>
+            <h1 className="h3 mt-1">{product.title}</h1>
 
             <hr className="my-3" />
 
             <div className="d-flex align-items-center gap-3">
-              <div className="price-now">{product?.price}</div>
+              <div className="price-now">{formatCLP(product.price)}</div>
             </div>
 
             <div className="buy-cta mt-3">
@@ -60,7 +63,11 @@ export const ProductDetail = () => {
                 <span className="small text-secondary">Máximo 5 unidades.</span>
               </div>
 
-              <button className="btn btn-dark btn-lg w-50">
+              <button
+                className="btn btn-dark btn-lg w-50"
+                //AÑADIMOS EL LA FUNCION AL BOTON
+                onClick={() => addToCart(product)}
+              >
                 <i className="bi bi-cart-plus me-2"></i> Agregar al Carro
               </button>
             </div>

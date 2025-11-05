@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 export const Navbar = () => {
+  const { items } = useCart();
+  const totalItems = items.reduce(
+    (acumulador, producto) => acumulador + producto.qty,
+    0
+  );
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
@@ -54,7 +60,7 @@ export const Navbar = () => {
               >
                 <i className="bi bi-cart-fill"></i>
                 <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-badge-sm">
-                  3{" "}
+                  {totalItems}
                   <span className="visually-hidden">
                     Productos en el carrito
                   </span>
